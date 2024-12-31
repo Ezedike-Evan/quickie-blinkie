@@ -1,14 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { ActionsJson } from "@solana/actions";
 
 import { HEADERS } from "@/app/helpers";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const payload: ActionsJson = {
     rules: [
       {
-        pathPattern: "/api/actions/**",
-        apiPath: "/api/actions/**",
+        pathPattern: "/",
+        apiPath: "/",
+      },
+      {
+        pathPattern: "/**",
+        apiPath: "/**",
       },
     ],
   };

@@ -3,7 +3,7 @@ import { ActionsJson } from "@solana/actions";
 
 import { HEADERS } from "@/app/helpers";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const payload: ActionsJson = {
     rules: [
       {

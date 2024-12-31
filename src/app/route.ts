@@ -19,14 +19,13 @@ import {
   CLUSTER_URL,
   HEADERS,
   TIP_AMOUNT,
-  URL_PATH,
   fetchMint,
   fetchTokenData,
 } from "@/app/helpers";
 
 const TO_PUBKEY = new PublicKey(process.env.PROGRAM_ACCOUNT!);
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const tokenMint = await fetchMint();
   const { address, imageURL, name, symbol, description, supply, decimals } =
     await fetchTokenData(tokenMint);
@@ -50,6 +49,7 @@ export async function POST(req: NextRequest) {
     try {
       payer = new PublicKey(body.account);
     } catch (err: any) {
+      console.log(err);
       throw new Error("Invalid account provided: not a valid public key");
     }
 
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(payload, { status: 200, headers: HEADERS });
   } catch (err: any) {
-    return NextResponse.json({ message: err.message } as ActionError, {
+    return NextResponse.json({ message: err?.message } as ActionError, {
       status: 400,
       headers: HEADERS,
     });

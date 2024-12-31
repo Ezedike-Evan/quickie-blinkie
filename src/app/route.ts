@@ -25,15 +25,17 @@ import {
 
 const TO_PUBKEY = new PublicKey(process.env.PROGRAM_ACCOUNT!);
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const tokenMint = await fetchMint();
-  const { address, imageURL, name, symbol, description, supply, decimals } =
+  const { address, imageURL, name, symbol, description, marketcap } =
     await fetchTokenData(tokenMint);
 
   const payload: ActionGetResponse = {
     title: "New Token Alert",
     icon: imageURL,
-    description: `Name: ${name}\nSymbol: \$${symbol.toUpperCase()}\nDescription: ${description}\nAddress: ${address}\nSupply: ${supply}\nDecimals: ${decimals}\nhttps://pump.fun/coin/${address}\n\nIf you liked this, please tip me!`,
+    description: `Name: ${name}\nSymbol: \$${symbol.toUpperCase()}\nDescription: ${description}\nAddress: ${address}\nMarket Cap: \$${parseFloat(
+      marketcap.toString()
+    ).toFixed()}\nhttps://pump.fun/coin/${address}\n\nIf you liked this, please tip me!`,
     label: "Great job, dev!",
   };
 

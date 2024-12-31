@@ -4,9 +4,9 @@ import { clusterApiUrl } from "@solana/web3.js";
 // CONSTANTS
 export const TIP_AMOUNT = 0.005;
 export const URL_PATH = "/api/actions";
-export const CLUSTER_URL = clusterApiUrl("mainnet-beta");
+export const CLUSTER_URL = clusterApiUrl("devnet");
 export const HEADERS = createActionHeaders({
-  chainId: "mainnet",
+  chainId: "devnet",
   actionVersion: "2.2",
 });
 
@@ -42,14 +42,15 @@ export const fetchTokenData = async (tokenMint: string) => {
   const address = data.result.id;
   const imageURL = data.result.content.links.image;
   const { name, symbol, description } = data.result.content.metadata;
-  const { supply, decimals } = data.result.token_info;
+  const { supply, decimals, price_info } = data.result.token_info;
+  const marketcap = (supply * price_info.price_per_token) / 10 ** decimals;
+
   return {
     address,
     imageURL,
     name,
     symbol,
     description,
-    supply,
-    decimals,
+    marketcap,
   };
 };

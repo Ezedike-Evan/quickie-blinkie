@@ -11,18 +11,17 @@ export const HEADERS = createActionHeaders({
 });
 
 export const fetchMint = async () => {
-  const response = await fetch(process.env.QUICKNODE_FUNCTION_URL as string, {
-    method: "POST",
+  const response = await fetch(process.env.QUICKNODE_KVS_URL as string, {
+    method: "GET",
     redirect: "follow",
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      "x-api-key": process.env.QUICKNODE_API_KEY as string,
+      "X-Api-Key": process.env.QUICKNODE_API_KEY as string,
     },
   });
   const data = await response.json();
-  console.log({ data: response.body });
-  return data.mint[0];
+  return data.data.value;
 };
 
 export const fetchTokenData = async (tokenMint: string) => {

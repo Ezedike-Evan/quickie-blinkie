@@ -4,9 +4,9 @@ import { clusterApiUrl } from "@solana/web3.js";
 // CONSTANTS
 export const TIP_AMOUNT = 0.005;
 export const URL_PATH = "/api/actions";
-export const CLUSTER_URL = clusterApiUrl("devnet");
+export const CLUSTER_URL = clusterApiUrl("mainnet-beta");
 export const HEADERS = createActionHeaders({
-  chainId: "devnet",
+  chainId: "mainnet",
   actionVersion: "2.2",
 });
 

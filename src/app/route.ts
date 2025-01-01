@@ -33,9 +33,11 @@ export async function GET(req: NextRequest) {
   const payload: ActionGetResponse = {
     title: "New Token Alert",
     icon: imageURL,
-    description: `Name: ${name}\nSymbol: \$${symbol.toUpperCase()}\nDescription: ${description}\nAddress: ${address}\nMarket Cap: \$${parseFloat(
+    description: `\n\nName: ${name}\n\nSymbol: \$${symbol.toUpperCase()}\n\nDescription: ${description}\n\nAddress: ${address}\n\nMarket Cap: \$${parseFloat(
       marketcap.toString()
-    ).toFixed()}\nhttps://pump.fun/coin/${address}\n\nIf you liked this, please tip me!`,
+    ).toFixed(
+      2
+    )}\n\nhttps://pump.fun/coin/${address}\n\nIf you liked this, please tip me!`,
     label: "Great job, dev!",
   };
 

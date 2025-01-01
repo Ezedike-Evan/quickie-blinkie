@@ -21,7 +21,7 @@ export const fetchMint = async () => {
     },
   });
   const data = await response.json();
-  console.log({ data, response });
+  console.log({ data: response.body });
   return data.mint[0];
 };
 
